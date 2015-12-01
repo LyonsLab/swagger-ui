@@ -35,13 +35,1510 @@
       } else {
         url = "http://petstore.swagger.io/v2/swagger.json";
       }
-
+      //var url = "https://genomevolution.org/coge/api/v1";
       // Pre load translate...
       if(window.SwaggerTranslator) {
         window.SwaggerTranslator.translate();
       }
+      
+      var swaggerJSON = {
+    		  "swagger" : "2.0",
+    		  "info" : {
+    		    "description" : "An API specification for CoGe, built in Swagger-2.0",
+    		    "version" : "0.1.0",
+    		    "title" : "CoGe API",
+    		    "termsOfService" : "http://helloreverb.com/terms/",
+    		    "contact" : {
+    		      "name" : "TBD",
+    		      "url" : "http://swagger.io",
+    		      "email" : "foo@example.com"
+    		    },
+    		    "license" : {
+    		      "name" : "MIT",
+    		      "url" : "http://opensource.org/licenses/MIT"
+    		    }
+    		  },
+    		  "host" : "genomevolution.org",
+    		  "basePath" : "/coge/api/v1",
+    		  "schemes" : [ "https" ],
+    		  "consumes" : [ "application/json" ],
+    		  "produces" : [ "application/json" ],
+    		  "paths" : {
+    		    "/experiments" : {
+    		      "put" : {
+    		        "description" : "Add a new organism.  Please make sure that the description is an NCBI taxonomy. (Support for NCBI tax_id will be added in the future.)",
+    		        "operationId" : "Experiment Add",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "in" : "body",
+    		          "name" : "param object",
+    		          "description" : "input JSON",
+    		          "required" : true,
+    		          "schema" : {
+    		            "$ref" : "#/definitions/expPutParam"
+    		          }
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/expPutResponse"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/experiments/search/{term}" : {
+    		      "get" : {
+    		        "description" : "Return a list of genomes that have an id, name, or description that partially match the search term.  Include genomes with organisms that have a name or description that partially match the search term.",
+    		        "operationId" : "Experiment Search",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "term",
+    		          "in" : "path",
+    		          "description" : "search term",
+    		          "required" : true,
+    		          "type" : "string"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/experiments"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/experiments/{id}" : {
+    		      "get" : {
+    		        "description" : "Return the metadata for the specified genome.  The results are the same for Genome Search but include additional metadata and experiments.",
+    		        "operationId" : "Experiment Fetch",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "experiment id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/experiment"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/genomes" : {
+    		      "put" : {
+    		        "description" : "Add a new organism.  Please make sure that the description is an NCBI taxonomy. (Support for NCBI tax_id will be added in the future.)",
+    		        "operationId" : "Genome Add",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "in" : "body",
+    		          "name" : "param object",
+    		          "description" : "input JSON",
+    		          "required" : true,
+    		          "schema" : {
+    		            "$ref" : "#/definitions/genPutParam"
+    		          }
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/genPutResponse"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/genomes/search/{term}" : {
+    		      "get" : {
+    		        "description" : "Return a list of genomes that have an id, name, or description that partially match the search term.  Include genomes with organisms that have a name or description that partially match the search term.",
+    		        "operationId" : "Genome Search",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "term",
+    		          "in" : "path",
+    		          "description" : "search term",
+    		          "required" : true,
+    		          "type" : "string"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/genomes"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/genomes/{id}" : {
+    		      "get" : {
+    		        "description" : "Return the metadata for the specified genome.  The results are the same for Genome Search but include additional metadata and experiments.",
+    		        "operationId" : "Genome Fetch",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "genome id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/genome"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/groups/search/{term}" : {
+    		      "get" : {
+    		        "description" : "Return a list of user groups that have an id, name, or description that partially match the search term.",
+    		        "operationId" : "Group Search",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "term",
+    		          "in" : "path",
+    		          "description" : "search term",
+    		          "required" : true,
+    		          "type" : "string"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/groups"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/groups/{id}" : {
+    		      "get" : {
+    		        "description" : "Return the metadata for the specified user group.",
+    		        "operationId" : "Group Fetch",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "user group id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/group"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/irods/list/{path}" : {
+    		      "get" : {
+    		        "description" : "Return the status for the specified job.  The recommended polling rate varies by job type, however anywhere from once per 15 seconds to once per minute should be adequate.",
+    		        "operationId" : "Data Store List",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "path",
+    		          "in" : "path",
+    		          "description" : "path to file",
+    		          "required" : true,
+    		          "type" : "string"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/irods"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/jbrowse/config/tracks/?gid={id}" : {
+    		      "get" : {
+    		        "description" : "Return track configurations for constructing the track selector.",
+    		        "operationId" : "JBrowse Fetch Configuration",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "genome id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/jconfig"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/jbrowse/experiment/notebook/{id}/features/{chr}?start={start}&end={end}" : {
+    		      "get" : {
+    		        "description" : "Return sequence data compliant with the JBrowse REST Feature Store API.",
+    		        "operationId" : "JBrowse Fetch Notebook Data",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "notebook id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        }, {
+    		          "name" : "chr",
+    		          "in" : "path",
+    		          "description" : "chromosome id",
+    		          "required" : true,
+    		          "type" : "string"
+    		        }, {
+    		          "name" : "start",
+    		          "in" : "path",
+    		          "description" : "start location",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        }, {
+    		          "name" : "end",
+    		          "in" : "path",
+    		          "description" : "end location",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/jnotebook"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/jbrowse/experiment/{id}/features/{chr}?start={start}&end={end}" : {
+    		      "get" : {
+    		        "description" : "Return sequence data compliant with the JBrowse REST Feature Store API.",
+    		        "operationId" : "JBrowse Fetch Experiment Data",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "experiment id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        }, {
+    		          "name" : "chr",
+    		          "in" : "path",
+    		          "description" : "chromosome id",
+    		          "required" : true,
+    		          "type" : "string"
+    		        }, {
+    		          "name" : "start",
+    		          "in" : "path",
+    		          "description" : "start location",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        }, {
+    		          "name" : "end",
+    		          "in" : "path",
+    		          "description" : "end location",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/jexperiment"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/jbrowse/sequence/{id}/features/{chr}?start={start}&end={end}" : {
+    		      "get" : {
+    		        "description" : "Return sequence data compliant with the JBrowse REST Feature Store API.",
+    		        "operationId" : "JBrowse Fetch Sequence Data",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "genome id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        }, {
+    		          "name" : "chr",
+    		          "in" : "path",
+    		          "description" : "chromosome id",
+    		          "required" : true,
+    		          "type" : "string"
+    		        }, {
+    		          "name" : "start",
+    		          "in" : "path",
+    		          "description" : "start location",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        }, {
+    		          "name" : "end",
+    		          "in" : "path",
+    		          "description" : "end location",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/jsequence"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/jbrowse/track/annotation/{id}/features/{chr}?start={start}&end={end}" : {
+    		      "get" : {
+    		        "description" : "Return sequence data compliant with the JBrowse REST Feature Store API.",
+    		        "operationId" : "JBrowse Fetch Feature Data",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "dataset id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        }, {
+    		          "name" : "chr",
+    		          "in" : "path",
+    		          "description" : "chromosome id",
+    		          "required" : true,
+    		          "type" : "string"
+    		        }, {
+    		          "name" : "start",
+    		          "in" : "path",
+    		          "description" : "start location",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        }, {
+    		          "name" : "end",
+    		          "in" : "path",
+    		          "description" : "end location",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/jfeature"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/jobs" : {
+    		      "put" : {
+    		        "description" : "Submit a new job.",
+    		        "operationId" : "Jobs Submit",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "in" : "body",
+    		          "name" : "param object",
+    		          "description" : "input JSON, depends on job type",
+    		          "required" : true,
+    		          "schema" : {
+    		            "$ref" : "#/definitions/jobPutParam"
+    		          }
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/jobPutResponse"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/jobs/{id}" : {
+    		      "get" : {
+    		        "description" : "Return the status for the specified job.  The recommended polling rate varies by job type, however anywhere from once per 15 seconds to once per minute should be adequate.",
+    		        "operationId" : "Job Fetch",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "job id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/job"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/notebooks" : {
+    		      "put" : {
+    		        "description" : "Add a new notebook.",
+    		        "operationId" : "Notebook Add",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "in" : "body",
+    		          "name" : "param object",
+    		          "description" : "input JSON",
+    		          "required" : true,
+    		          "schema" : {
+    		            "$ref" : "#/definitions/notePutParam"
+    		          }
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/notePutResponse"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/notebooks/search/{term}" : {
+    		      "get" : {
+    		        "description" : "Return a list of notebooks that have an id, name, or description that partially match the search term.",
+    		        "operationId" : "Notebook Search",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "term",
+    		          "in" : "path",
+    		          "description" : "search term",
+    		          "required" : true,
+    		          "type" : "string"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/notebooks"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/notebooks/{id}" : {
+    		      "get" : {
+    		        "description" : "Return the metadata for the specified notebook.",
+    		        "operationId" : "Notebook Fetch",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "notebook id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/notebook"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/organisms" : {
+    		      "put" : {
+    		        "description" : "Add a new organism.  Please make sure that the description is an NCBI taxonomy. (Support for NCBI tax_id will be added in the future.)",
+    		        "operationId" : "Organism Add",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "in" : "body",
+    		          "name" : "param object",
+    		          "description" : "name of organism",
+    		          "required" : true,
+    		          "schema" : {
+    		            "$ref" : "#/definitions/orgPutParam"
+    		          }
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/orgPutResponse"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/organisms/search/{term}" : {
+    		      "get" : {
+    		        "description" : "Return a list of organisms that have an id, name, or description that partially match the search term.",
+    		        "operationId" : "Organism Search",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "term",
+    		          "in" : "path",
+    		          "description" : "search term",
+    		          "required" : true,
+    		          "type" : "string"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/organisms"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/organisms/{id}" : {
+    		      "get" : {
+    		        "description" : "Return the metadata for the specified organism.",
+    		        "operationId" : "Organism Fetch",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "organism id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/organism"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "/users/{id}/items" : {
+    		      "get" : {
+    		        "description" : "Returns a list of items shared with the specified user.  Only public items, or items which the authenticated requester has access to, are returned. Cannot be used for users other than the authenticated user, otherwise an Access Denied error is returned.",
+    		        "operationId" : "Uesr Fetch Shared Items",
+    		        "produces" : [ "application/json" ],
+    		        "parameters" : [ {
+    		          "name" : "id",
+    		          "in" : "path",
+    		          "description" : "user id",
+    		          "required" : true,
+    		          "type" : "integer"
+    		        } ],
+    		        "responses" : {
+    		          "default" : {
+    		            "description" : "default response",
+    		            "schema" : {
+    		              "$ref" : "#/definitions/user"
+    		            }
+    		          }
+    		        }
+    		      }
+    		    }
+    		  },
+    		  "definitions" : {
+    		    "orgPutParam" : {
+    		      "type" : "object",
+    		      "required" : [ "description", "name" ],
+    		      "properties" : {
+    		        "name" : {
+    		          "type" : "string"
+    		        },
+    		        "description" : {
+    		          "type" : "string"
+    		        }
+    		      }
+    		    },
+    		    "orgPutResponse" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "successes" : {
+    		          "type" : "boolean"
+    		        },
+    		        "id" : {
+    		          "type" : "integer"
+    		        }
+    		      }
+    		    },
+    		    "organism" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "id" : {
+    		          "type" : "integer"
+    		        },
+    		        "name" : {
+    		          "type" : "string"
+    		        },
+    		        "description" : {
+    		          "type" : "string"
+    		        },
+    		        "genomes" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "integer"
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "organisms" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "organisms" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "name" : {
+    		                "type" : "string"
+    		              },
+    		              "description" : {
+    		                "type" : "string"
+    		              },
+    		              "id" : {
+    		                "type" : "integer"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "genPutParam" : {
+    		      "type" : "object",
+    		      "required" : [ "additional_metadata", "organism_id", "source_data" ],
+    		      "properties" : {
+    		        "organism_id" : {
+    		          "type" : "integer"
+    		        },
+    		        "metadata" : {
+    		          "$ref" : "#/definitions/genPutParam_metadata"
+    		        },
+    		        "additional_metadata" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "test" : {
+    		                "type" : "string"
+    		              },
+    		              "link" : {
+    		                "type" : "string"
+    		              },
+    		              "type_group" : {
+    		                "type" : "string"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        },
+    		        "source_data" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "path" : {
+    		                "type" : "string"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "genPutResponse" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "successes" : {
+    		          "type" : "boolean"
+    		        },
+    		        "id" : {
+    		          "type" : "integer"
+    		        },
+    		        "site_url" : {
+    		          "type" : "string"
+    		        }
+    		      }
+    		    },
+    		    "genome" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "id" : {
+    		          "type" : "integer"
+    		        },
+    		        "name" : {
+    		          "type" : "string"
+    		        },
+    		        "description" : {
+    		          "type" : "string"
+    		        },
+    		        "link" : {
+    		          "type" : "string"
+    		        },
+    		        "version" : {
+    		          "type" : "string"
+    		        },
+    		        "organism" : {
+    		          "$ref" : "#/definitions/genome_organism"
+    		        },
+    		        "sequence_type" : {
+    		          "type" : "string"
+    		        },
+    		        "restricted" : {
+    		          "type" : "boolean"
+    		        },
+    		        "chromosome_count" : {
+    		          "type" : "integer"
+    		        },
+    		        "additional_metadata" : {
+    		          "$ref" : "#/definitions/genome_additional_metadata"
+    		        },
+    		        "experiments" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "integer"
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "genomes" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "genomes" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "organism_id" : {
+    		                "type" : "integer"
+    		              },
+    		              "sequence_type" : {
+    		                "type" : "string"
+    		              },
+    		              "organism" : {
+    		                "type" : "object",
+    		                "properties" : {
+    		                  "name" : {
+    		                    "type" : "string"
+    		                  },
+    		                  "description" : {
+    		                    "type" : "string"
+    		                  },
+    		                  "id" : {
+    		                    "type" : "integer"
+    		                  }
+    		                }
+    		              },
+    		              "restricted" : {
+    		                "type" : "boolean"
+    		              },
+    		              "chromosome_count" : {
+    		                "type" : "integer"
+    		              },
+    		              "name" : {
+    		                "type" : "string"
+    		              },
+    		              "link" : {
+    		                "type" : "string"
+    		              },
+    		              "description" : {
+    		                "type" : "string"
+    		              },
+    		              "id" : {
+    		                "type" : "integer"
+    		              },
+    		              "version" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "expPutParam" : {
+    		      "type" : "object",
+    		      "required" : [ "additional_metadata", "genome_id", "notebook_id", "source_data" ],
+    		      "properties" : {
+    		        "genome_id" : {
+    		          "type" : "integer"
+    		        },
+    		        "notebook_id" : {
+    		          "type" : "integer"
+    		        },
+    		        "metadata" : {
+    		          "$ref" : "#/definitions/expPutParam_metadata"
+    		        },
+    		        "additional_metadata" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "link" : {
+    		                "type" : "string"
+    		              },
+    		              "text" : {
+    		                "type" : "string"
+    		              },
+    		              "type_group" : {
+    		                "type" : "string"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        },
+    		        "source_data" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "path" : {
+    		                "type" : "string"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "expPutResponse" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "success" : {
+    		          "type" : "boolean"
+    		        },
+    		        "id" : {
+    		          "type" : "integer"
+    		        },
+    		        "site_url" : {
+    		          "type" : "string"
+    		        }
+    		      }
+    		    },
+    		    "experiment" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "id" : {
+    		          "type" : "integer"
+    		        },
+    		        "name" : {
+    		          "type" : "string"
+    		        },
+    		        "description" : {
+    		          "type" : "string"
+    		        },
+    		        "version" : {
+    		          "type" : "string"
+    		        },
+    		        "genome_id" : {
+    		          "type" : "integer"
+    		        },
+    		        "source" : {
+    		          "type" : "string"
+    		        },
+    		        "types" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "name" : {
+    		                "type" : "string"
+    		              },
+    		              "description" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        },
+    		        "restricted" : {
+    		          "type" : "boolean"
+    		        }
+    		      }
+    		    },
+    		    "experiments" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "experiments" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "name" : {
+    		                "type" : "string"
+    		              },
+    		              "description" : {
+    		                "type" : "string"
+    		              },
+    		              "id" : {
+    		                "type" : "integer"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "notePutParam" : {
+    		      "type" : "object",
+    		      "required" : [ "additional_metadata", "items" ],
+    		      "properties" : {
+    		        "metadata" : {
+    		          "$ref" : "#/definitions/notePutParam_metadata"
+    		        },
+    		        "additional_metadata" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "link" : {
+    		                "type" : "string"
+    		              },
+    		              "text" : {
+    		                "type" : "string"
+    		              },
+    		              "type_group" : {
+    		                "type" : "string"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        },
+    		        "items" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "id" : {
+    		                "type" : "integer"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "notePutResponse" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "success" : {
+    		          "type" : "boolean"
+    		        },
+    		        "id" : {
+    		          "type" : "integer"
+    		        }
+    		      }
+    		    },
+    		    "notebook" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "id" : {
+    		          "type" : "integer"
+    		        },
+    		        "name" : {
+    		          "type" : "string"
+    		        },
+    		        "description" : {
+    		          "type" : "string"
+    		        },
+    		        "type" : {
+    		          "type" : "string"
+    		        },
+    		        "restricted" : {
+    		          "type" : "boolean"
+    		        },
+    		        "additional_metadata" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "test" : {
+    		                "type" : "string"
+    		              },
+    		              "link" : {
+    		                "type" : "string"
+    		              },
+    		              "type_group" : {
+    		                "type" : "string"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        },
+    		        "items" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "id" : {
+    		                "type" : "integer"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "notebooks" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "notebooks" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "name" : {
+    		                "type" : "string"
+    		              },
+    		              "description" : {
+    		                "type" : "string"
+    		              },
+    		              "id" : {
+    		                "type" : "integer"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "user" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "items" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "role" : {
+    		                "type" : "string"
+    		              },
+    		              "id" : {
+    		                "type" : "integer"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "group" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "id" : {
+    		          "type" : "integer"
+    		        },
+    		        "name" : {
+    		          "type" : "string"
+    		        },
+    		        "description" : {
+    		          "type" : "string"
+    		        },
+    		        "role" : {
+    		          "type" : "string"
+    		        },
+    		        "users" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "integer"
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "groups" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "groups" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "role" : {
+    		                "type" : "string"
+    		              },
+    		              "name" : {
+    		                "type" : "string"
+    		              },
+    		              "description" : {
+    		                "type" : "string"
+    		              },
+    		              "id" : {
+    		                "type" : "integer"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "jobPutParam" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "type" : {
+    		          "type" : "string"
+    		        },
+    		        "parameters" : {
+    		          //"type" : "object",
+    		          "description" : "Specific to job type.\nParameters by job type:\n  \"export_fasta\": export genome sequence in FASTA fileformat\n    genome_id:  genome id:\n  \"export_gff\": export genome annotation in GFF file format\n    genome_id:  genome id\n  \"export_genome\": export genome FASTA/GFF in .tar.gz file\\ngenome_id:  genome id\n  \"export_experiment\": export experiment data files in .tar.gz format\n    experiment_id:  experiment id\nParameters common to all job types:\n  source_data: [\n    { \"type\": \"irods\", \"path\": \"/iplant/home/user/file\\\" },\n    { \"type\": \"ftp\",   \"path\": \"ftp://domain/file\\\" },\n    { \"type\": \"http\",  \"path\": \"https://domain/file\\\" }\n  ]\n  dest_type (required)\n    \"irods\":  send the output file(s) to IRODS\n    \"http\" (default):  generate a URL to download the output file(s)\n  dest_path (optional): destination path in IRODS\n  overwrite (optional)\n    0 (default):  do not overwrite existing files in IRODS\n    1: overwrite existing files in IRODS\n  email (optional):  address to send notification email when job is finished\n  notebook (optional): boolean flag to indicate that the results should be placed into a notebook\n    notebook_id:  the ID for an existing notebook\n    notebook_name:  the name for a new notebook if an existing ID was note given.  If not specified a name is automatically assigned.\n    \n",
+    		          //"properties" : { }
+    		        }
+    		      }
+    		    },
+    		    "jobPutResponse" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "id" : {
+    		          "type" : "integer"
+    		        },
+    		        "success" : {
+    		          "type" : "boolean"
+    		        },
+    		        "site_url" : {
+    		          "type" : "string"
+    		        }
+    		      }
+    		    },
+    		    "job" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "id" : {
+    		          "type" : "integer"
+    		        },
+    		        "status" : {
+    		          "type" : "string"
+    		        },
+    		        "tasks" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "log" : {
+    		                "type" : "string"
+    		              },
+    		              "description" : {
+    		                "type" : "string"
+    		              },
+    		              "status" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        },
+    		        "results" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "description" : "{\n  type: \"http\",\n  name: \"string\",\n  path: \"url\"\n},\\n\n{\n  type: \"irods\",\n  name: \"string\",\n  path: \"/iplant/home/{user}/coge_data/{file}\"\n},\n{ \n  type: \"experiment\" | \"genome\" | \"notebook\",\n  id: integer\n  name: \"string\"\n  description: \"string\"\n  version: \"string\"\n  data_source_id: integer\n  restricted: boolean\n}\n",
+    		            "properties" : { }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "irods" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "items" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "description" : "{\n  \"name\": \"coge_data/\",\n  \"path\": \"/iplant/home/coge/coge_data\",\n  \"type\": \"directory\"\n},\n{\n  \"size\": \"96391416\",\n  \"path\": \"/iplant/home/coge/genome.fasta\",\n  \"name\": \"genome.fasta\",\n  \"timestamp\": \"2014-01-07.14:57\",\n  \"type\": \"file\"\n}\n",
+    		            "properties" : { }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "jconfig" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "tracks" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "baseUrl" : {
+    		                "type" : "string"
+    		              },
+    		              "chunckSize" : {
+    		                "type" : "integer"
+    		              },
+    		              "storeClass" : {
+    		                "type" : "string"
+    		              },
+    		              "coge" : {
+    		                "type" : "object",
+    		                "properties" : {
+    		                  "id" : {
+    		                    "type" : "integer"
+    		                  },
+    		                  "type" : {
+    		                    "type" : "string"
+    		                  }
+    		                }
+    		              },
+    		              "label" : {
+    		                "type" : "string"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              },
+    		              "formatVersion" : {
+    		                "type" : "integer"
+    		              },
+    		              "key" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "jsequence" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "features" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "start" : {
+    		                "type" : "integer"
+    		              },
+    		              "end" : {
+    		                "type" : "integer"
+    		              },
+    		              "seq" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "jfeature" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "features" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "strand" : {
+    		                "type" : "integer"
+    		              },
+    		              "name" : {
+    		                "type" : "string"
+    		              },
+    		              "start" : {
+    		                "type" : "integer"
+    		              },
+    		              "end" : {
+    		                "type" : "integer"
+    		              },
+    		              "wobble" : {
+    		                "type" : "integer"
+    		              },
+    		              "chr" : {
+    		                "type" : "string"
+    		              },
+    		              "type" : {
+    		                "type" : "string"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "jexperiment" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "feature" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "score" : {
+    		                "type" : "number",
+    		                "format" : "float"
+    		              },
+    		              "score2" : {
+    		                "type" : "integer"
+    		              },
+    		              "start" : {
+    		                "type" : "integer"
+    		              },
+    		              "end" : {
+    		                "type" : "integer"
+    		              },
+    		              "id" : {
+    		                "type" : "integer"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "jnotebook" : {
+    		      "type" : "object",
+    		      "properties" : {
+    		        "features" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "object",
+    		            "properties" : {
+    		              "score" : {
+    		                "type" : "number",
+    		                "format" : "float"
+    		              },
+    		              "score2" : {
+    		                "type" : "number",
+    		                "format" : "float"
+    		              },
+    		              "start" : {
+    		                "type" : "integer"
+    		              },
+    		              "end" : {
+    		                "type" : "integer"
+    		              },
+    		              "id" : {
+    		                "type" : "integer"
+    		              }
+    		            }
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "genPutParam_metadata" : {
+    		      "properties" : {
+    		        "type_id" : {
+    		          "type" : "integer"
+    		        },
+    		        "restricted" : {
+    		          "type" : "boolean"
+    		        },
+    		        "name" : {
+    		          "type" : "string"
+    		        },
+    		        "description" : {
+    		          "type" : "string"
+    		        },
+    		        "version" : {
+    		          "type" : "string"
+    		        },
+    		        "source_name" : {
+    		          "type" : "string"
+    		        },
+    		        "tags" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "string"
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "genome_organism" : {
+    		      "properties" : {
+    		        "name" : {
+    		          "type" : "string"
+    		        },
+    		        "description" : {
+    		          "type" : "string"
+    		        },
+    		        "id" : {
+    		          "type" : "integer"
+    		        }
+    		      }
+    		    },
+    		    "genome_additional_metadata" : {
+    		      "properties" : {
+    		        "test" : {
+    		          "type" : "string"
+    		        },
+    		        "link" : {
+    		          "type" : "string"
+    		        },
+    		        "type_group" : {
+    		          "type" : "string"
+    		        },
+    		        "type" : {
+    		          "type" : "string"
+    		        }
+    		      }
+    		    },
+    		    "expPutParam_metadata" : {
+    		      "properties" : {
+    		        "restricted" : {
+    		          "type" : "boolean"
+    		        },
+    		        "name" : {
+    		          "type" : "string"
+    		        },
+    		        "description" : {
+    		          "type" : "string"
+    		        },
+    		        "source" : {
+    		          "type" : "string"
+    		        },
+    		        "version" : {
+    		          "type" : "string"
+    		        },
+    		        "tags" : {
+    		          "type" : "array",
+    		          "items" : {
+    		            "type" : "string"
+    		          }
+    		        }
+    		      }
+    		    },
+    		    "notePutParam_metadata" : {
+    		      "properties" : {
+    		        "restricted" : {
+    		          "type" : "boolean"
+    		        },
+    		        "name" : {
+    		          "type" : "string"
+    		        },
+    		        "description" : {
+    		          "type" : "string"
+    		        },
+    		        "type" : {
+    		          "type" : "string"
+    		        }
+    		      }
+    		    }
+    		  }
+    		}
+      
       window.swaggerUi = new SwaggerUi({
         url: url,
+        spec: swaggerJSON,
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
         onComplete: function(swaggerApi, swaggerUi){
@@ -54,44 +1551,36 @@
               scopeSeparator: ","
             });
           }
-
           if(window.SwaggerTranslator) {
             window.SwaggerTranslator.translate();
           }
-
           $('pre code').each(function(i, e) {
             hljs.highlightBlock(e)
           });
-
-          addApiKeyAuthorization();
+          //addApiKeyAuthorization();
         },
         onFailure: function(data) {
           log("Unable to Load SwaggerUI");
         },
         docExpansion: "none",
-        apisSorter: "alpha",
+        //apisSorter: "alpha",
         showRequestHeaders: false
       });
-
-      function addApiKeyAuthorization(){
+      /*function addApiKeyAuthorization(){
         var key = encodeURIComponent($('#input_apiKey')[0].value);
         if(key && key.trim() != "") {
             var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
             window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
             log("added key " + key);
         }
-      }
-
-      $('#input_apiKey').change(addApiKeyAuthorization);
-
+      }*/
+      /*$('#input_apiKey').change(addApiKeyAuthorization);*/
       // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
       /*
         var apiKey = "myApiKeyXXXX123456789";
         $('#input_apiKey').val(apiKey);
       */
-
       window.swaggerUi.load();
-
       function log() {
         if ('console' in window) {
           console.log.apply(console, arguments);
@@ -102,7 +1591,7 @@
 </head>
 
 <body class="swagger-section">
-<div id='header'>
+<!--<div id='header'>
   <div class="swagger-ui-wrap">
     <a id="logo" href="http://swagger.io">swagger</a>
     <form id='api_selector'>
@@ -111,7 +1600,7 @@
       <div class='input'><a id="explore" href="#" data-sw-translate>Explore</a></div>
     </form>
   </div>
-</div>
+</div>-->
 
 <div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
 <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
