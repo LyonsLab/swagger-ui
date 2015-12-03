@@ -255,7 +255,7 @@
     		    "/irods/list/{path}" : {
     		      "get" : {
     		    	"tags" : [ "irods" ],
-    		        "description" : "Return the status for the specified job.  The recommended polling rate varies by job type, however anywhere from once per 15 seconds to once per minute should be adequate.",
+    		        "description" : "Return the status for the specified job.  The recommended polling rate varies by job type, however anywhere from once per 15 seconds to once per minute should be adequate.\n\nThe \"items\" field below will look like one of the following:\n\n\t{\n\t\t\"name\": \"coge_data/\",\n\t\t\"path\": \"/iplant/home/coge/coge_data\",\n\t\t\"type\": \"directory\"\n\t}\n\n\tOR\n\n\t{\n\t\t\"size\": \"96391416\",\n\t\t\"path\": \"/iplant/home/coge/genome.fasta\",\n\t\t\"name\": \"genome.fasta\",\n\t\t\"timestamp\": \"2014-01-07.14:57\",\n\t\t\"type\": \"file\"\n\t}\n",
     		        "operationId" : "Data Store List",
     		        "produces" : [ "application/json" ],
     		        "parameters" : [ {
@@ -465,7 +465,7 @@
     		    "/jobs" : {
     		      "post" : {
     		    	"tags" : [ "jobs" ],
-    		        "description" : "Submit a new job.",
+    		        "description" : "Submit a new job\n\n\"Parameters\" field is specific to job type:\n\n\tParameters by job type:\n\t\t\"export_fasta\": export genome sequence in FASTA fileformat\n\t\t\tgenome_id:  genome id\n\t\t\"export_gff\": export genome annotation in GFF file format\n\t\t\tgenome_id:  genome id\n\t\t\"export_genome\": export genome FASTA/GFF in .tar.gz file\\n\t\t\tgenome_id:  genome id\n\t\t\"export_experiment\": export experiment data files in .tar.gz format\n\t\t\texperiment_id:  experiment id\n\n\tParameters common to all job types:\n\t\tsource_data: [\n\t\t\t{ \"type\": \"irods\", \"path\": \"/iplant/home/user/file\" },\n\t\t\t{ \"type\": \"ftp\",   \"path\": \"ftp://domain/file\" },\n\t\t\t{ \"type\": \"http\",  \"path\": \"https://domain/file\" }\n\t\t]\n\t\tdest_type (required)\n\t\t\t\"irods\":  send the output file(s) to IRODS\n\t\t\t\"http\" (default):  generate a URL to download the output file(s)\n\t\tdest_path (optional): destination path in IRODS\n\t\toverwrite (optional)\n\t\t\t0 (default):  do not overwrite existing files in IRODS\n\t\t\t1: overwrite existing files in IRODS\n\t\temail (optional):  address to send notification email when job is finished\n\t\tnotebook (optional): boolean flag to indicate that the results should be placed into a notebook\n\t\t\tnotebook_id:  the ID for an existing notebook\n\t\t\tnotebook_name:  the name for a new notebook if an existing ID was note given.  If not specified a name is automatically assigned.\n\n    \n",
     		        "operationId" : "Jobs Submit",
     		        "produces" : [ "application/json" ],
     		        "parameters" : [ {
@@ -490,7 +490,7 @@
     		    "/jobs/{id}" : {
     		      "get" : {
     		    	"tags" : [ "jobs" ],
-    		        "description" : "Return the status for the specified job.  The recommended polling rate varies by job type, however anywhere from once per 15 seconds to once per minute should be adequate.",
+    		        "description" : "Return the status for the specified job.  The recommended polling rate varies by job type, however anywhere from once per 15 seconds to once per minute should be adequate.\n\nThe \"results\" field below will look like one of the following:\n\n\t{\n\t\ttype: \"http\",\n\t\tname: \"string\",\n\t\tpath: \"url\"\n\t}\n\n\tOR\n\n\t{\n\t\ttype: \"irods\",\n\t\tname: \"string\",\n\t\tpath: \"/iplant/home/{user}/coge_data/{file}\"\n\t}\n\n\tOR\n\n\t{ \n\t\ttype: \"experiment\" | \"genome\" | \"notebook\",\n\t\tid: integer\n\t\tname: \"string\"\n\t\tdescription: \"string\"\n\t\tversion: \"string\"\n\t\tdata_source_id: integer\n\t\trestricted: boolean\n\t}\n",
     		        "operationId" : "Job Fetch",
     		        "produces" : [ "application/json" ],
     		        "parameters" : [ {
@@ -1229,9 +1229,8 @@
     		          "type" : "string"
     		        },
     		        "parameters" : {
-    		          //"type" : "object",
-    		          "description" : "Specific to job type.\nParameters by job type:\n  \"export_fasta\": export genome sequence in FASTA fileformat\n    genome_id:  genome id:\n  \"export_gff\": export genome annotation in GFF file format\n    genome_id:  genome id\n  \"export_genome\": export genome FASTA/GFF in .tar.gz file\\ngenome_id:  genome id\n  \"export_experiment\": export experiment data files in .tar.gz format\n    experiment_id:  experiment id\nParameters common to all job types:\n  source_data: [\n    { \"type\": \"irods\", \"path\": \"/iplant/home/user/file\\\" },\n    { \"type\": \"ftp\",   \"path\": \"ftp://domain/file\\\" },\n    { \"type\": \"http\",  \"path\": \"https://domain/file\\\" }\n  ]\n  dest_type (required)\n    \"irods\":  send the output file(s) to IRODS\n    \"http\" (default):  generate a URL to download the output file(s)\n  dest_path (optional): destination path in IRODS\n  overwrite (optional)\n    0 (default):  do not overwrite existing files in IRODS\n    1: overwrite existing files in IRODS\n  email (optional):  address to send notification email when job is finished\n  notebook (optional): boolean flag to indicate that the results should be placed into a notebook\n    notebook_id:  the ID for an existing notebook\n    notebook_name:  the name for a new notebook if an existing ID was note given.  If not specified a name is automatically assigned.\n    \n",
-    		          //"properties" : { }
+    		          "type" : "object",
+    		          //"description" : "Specific to job type.\nParameters by job type:\n  \"export_fasta\": export genome sequence in FASTA fileformat\n    genome_id:  genome id:\n  \"export_gff\": export genome annotation in GFF file format\n    genome_id:  genome id\n  \"export_genome\": export genome FASTA/GFF in .tar.gz file\\ngenome_id:  genome id\n  \"export_experiment\": export experiment data files in .tar.gz format\n    experiment_id:  experiment id\nParameters common to all job types:\n  source_data: [\n    { \"type\": \"irods\", \"path\": \"/iplant/home/user/file\\\" },\n    { \"type\": \"ftp\",   \"path\": \"ftp://domain/file\\\" },\n    { \"type\": \"http\",  \"path\": \"https://domain/file\\\" }\n  ]\n  dest_type (required)\n    \"irods\":  send the output file(s) to IRODS\n    \"http\" (default):  generate a URL to download the output file(s)\n  dest_path (optional): destination path in IRODS\n  overwrite (optional)\n    0 (default):  do not overwrite existing files in IRODS\n    1: overwrite existing files in IRODS\n  email (optional):  address to send notification email when job is finished\n  notebook (optional): boolean flag to indicate that the results should be placed into a notebook\n    notebook_id:  the ID for an existing notebook\n    notebook_name:  the name for a new notebook if an existing ID was note given.  If not specified a name is automatically assigned.\n    \n",
     		        }
     		      }
     		    },
@@ -1279,7 +1278,7 @@
     		          "type" : "array",
     		          "items" : {
     		            "type" : "object",
-    		            "description" : "{\n  type: \"http\",\n  name: \"string\",\n  path: \"url\"\n},\\n\n{\n  type: \"irods\",\n  name: \"string\",\n  path: \"/iplant/home/{user}/coge_data/{file}\"\n},\n{ \n  type: \"experiment\" | \"genome\" | \"notebook\",\n  id: integer\n  name: \"string\"\n  description: \"string\"\n  version: \"string\"\n  data_source_id: integer\n  restricted: boolean\n}\n",
+    		            //"description" : "{\n  type: \"http\",\n  name: \"string\",\n  path: \"url\"\n},\\n\n{\n  type: \"irods\",\n  name: \"string\",\n  path: \"/iplant/home/{user}/coge_data/{file}\"\n},\n{ \n  type: \"experiment\" | \"genome\" | \"notebook\",\n  id: integer\n  name: \"string\"\n  description: \"string\"\n  version: \"string\"\n  data_source_id: integer\n  restricted: boolean\n}\n",
     		            "properties" : { }
     		          }
     		        }
@@ -1292,8 +1291,8 @@
     		          "type" : "array",
     		          "items" : {
     		            "type" : "object",
-    		            "description" : "{\n  \"name\": \"coge_data/\",\n  \"path\": \"/iplant/home/coge/coge_data\",\n  \"type\": \"directory\"\n},\n{\n  \"size\": \"96391416\",\n  \"path\": \"/iplant/home/coge/genome.fasta\",\n  \"name\": \"genome.fasta\",\n  \"timestamp\": \"2014-01-07.14:57\",\n  \"type\": \"file\"\n}\n",
-    		            "properties" : { }
+    		            //"description" : "{\n  \"name\": \"coge_data/\",\n  \"path\": \"/iplant/home/coge/coge_data\",\n  \"type\": \"directory\"\n},\n{\n  \"size\": \"96391416\",\n  \"path\": \"/iplant/home/coge/genome.fasta\",\n  \"name\": \"genome.fasta\",\n  \"timestamp\": \"2014-01-07.14:57\",\n  \"type\": \"file\"\n}\n",
+    		            //"properties" : { }
     		          }
     		        }
     		      }
