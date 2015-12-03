@@ -44,19 +44,19 @@
       var swaggerJSON = {
     		  "swagger" : "2.0",
     		  "info" : {
-    		    "description" : "An API specification for CoGe, built in Swagger-2.0",
+    		    "description" : "An API specification for CoGe: <a href='http://docs.google.com/document/d/1GXOPIVvyTwoGR2IRjDNmdd2nj_6d8db7jx9hG8RxTDc'>Google Doc Specification</a>",
     		    "version" : "0.1.0",
     		    "title" : "CoGe API",
     		    "termsOfService" : "http://helloreverb.com/terms/",
-    		    "contact" : {
+    		    /*"contact" : {
     		      "name" : "TBD",
     		      "url" : "http://swagger.io",
     		      "email" : "foo@example.com"
-    		    },
-    		    "license" : {
+    		    },*/
+    		    /*"license" : {
     		      "name" : "MIT",
     		      "url" : "http://opensource.org/licenses/MIT"
-    		    }
+    		    }*/
     		  },
     		  "host" : "genomevolution.org",
     		  "basePath" : "/coge/api/v1",
@@ -66,6 +66,7 @@
     		  "paths" : {
     		    "/experiments" : {
     		      "put" : {
+    		    	"tags" : [ "experiments" ],
     		        "description" : "Add a new organism.  Please make sure that the description is an NCBI taxonomy. (Support for NCBI tax_id will be added in the future.)",
     		        "operationId" : "Experiment Add",
     		        "produces" : [ "application/json" ],
@@ -90,6 +91,7 @@
     		    },
     		    "/experiments/search/{term}" : {
     		      "get" : {
+    		    	"tags" : [ "experiments" ],
     		        "description" : "Return a list of genomes that have an id, name, or description that partially match the search term.  Include genomes with organisms that have a name or description that partially match the search term.",
     		        "operationId" : "Experiment Search",
     		        "produces" : [ "application/json" ],
@@ -112,6 +114,7 @@
     		    },
     		    "/experiments/{id}" : {
     		      "get" : {
+    	    	  	"tags" : [ "experiments" ],
     		        "description" : "Return the metadata for the specified genome.  The results are the same for Genome Search but include additional metadata and experiments.",
     		        "operationId" : "Experiment Fetch",
     		        "produces" : [ "application/json" ],
@@ -134,6 +137,7 @@
     		    },
     		    "/genomes" : {
     		      "put" : {
+    		    	"tags" : [ "genomes" ],
     		        "description" : "Add a new organism.  Please make sure that the description is an NCBI taxonomy. (Support for NCBI tax_id will be added in the future.)",
     		        "operationId" : "Genome Add",
     		        "produces" : [ "application/json" ],
@@ -158,6 +162,7 @@
     		    },
     		    "/genomes/search/{term}" : {
     		      "get" : {
+    		    	"tags" : [ "genomes" ],
     		        "description" : "Return a list of genomes that have an id, name, or description that partially match the search term.  Include genomes with organisms that have a name or description that partially match the search term.",
     		        "operationId" : "Genome Search",
     		        "produces" : [ "application/json" ],
@@ -180,6 +185,7 @@
     		    },
     		    "/genomes/{id}" : {
     		      "get" : {
+    		    	"tags" : [ "genomes" ],
     		        "description" : "Return the metadata for the specified genome.  The results are the same for Genome Search but include additional metadata and experiments.",
     		        "operationId" : "Genome Fetch",
     		        "produces" : [ "application/json" ],
@@ -202,6 +208,7 @@
     		    },
     		    "/groups/search/{term}" : {
     		      "get" : {
+    		    	"tags" : [ "user groups" ],
     		        "description" : "Return a list of user groups that have an id, name, or description that partially match the search term.",
     		        "operationId" : "Group Search",
     		        "produces" : [ "application/json" ],
@@ -224,6 +231,7 @@
     		    },
     		    "/groups/{id}" : {
     		      "get" : {
+    		    	"tags" : [ "user groups" ],
     		        "description" : "Return the metadata for the specified user group.",
     		        "operationId" : "Group Fetch",
     		        "produces" : [ "application/json" ],
@@ -246,6 +254,7 @@
     		    },
     		    "/irods/list/{path}" : {
     		      "get" : {
+    		    	"tags" : [ "irods" ],
     		        "description" : "Return the status for the specified job.  The recommended polling rate varies by job type, however anywhere from once per 15 seconds to once per minute should be adequate.",
     		        "operationId" : "Data Store List",
     		        "produces" : [ "application/json" ],
@@ -268,6 +277,7 @@
     		    },
     		    "/jbrowse/config/tracks/?gid={id}" : {
     		      "get" : {
+    		    	"tags" : [ "jbrowse" ],
     		        "description" : "Return track configurations for constructing the track selector.",
     		        "operationId" : "JBrowse Fetch Configuration",
     		        "produces" : [ "application/json" ],
@@ -290,6 +300,7 @@
     		    },
     		    "/jbrowse/experiment/notebook/{id}/features/{chr}?start={start}&end={end}" : {
     		      "get" : {
+    		    	"tags" : [ "jbrowse" ],
     		        "description" : "Return sequence data compliant with the JBrowse REST Feature Store API.",
     		        "operationId" : "JBrowse Fetch Notebook Data",
     		        "produces" : [ "application/json" ],
@@ -330,6 +341,7 @@
     		    },
     		    "/jbrowse/experiment/{id}/features/{chr}?start={start}&end={end}" : {
     		      "get" : {
+    		    	"tags" : [ "jbrowse" ],
     		        "description" : "Return sequence data compliant with the JBrowse REST Feature Store API.",
     		        "operationId" : "JBrowse Fetch Experiment Data",
     		        "produces" : [ "application/json" ],
@@ -370,6 +382,7 @@
     		    },
     		    "/jbrowse/sequence/{id}/features/{chr}?start={start}&end={end}" : {
     		      "get" : {
+    		    	"tags" : [ "jbrowse" ],
     		        "description" : "Return sequence data compliant with the JBrowse REST Feature Store API.",
     		        "operationId" : "JBrowse Fetch Sequence Data",
     		        "produces" : [ "application/json" ],
@@ -410,6 +423,7 @@
     		    },
     		    "/jbrowse/track/annotation/{id}/features/{chr}?start={start}&end={end}" : {
     		      "get" : {
+    		    	"tags" : [ "jbrowse" ],
     		        "description" : "Return sequence data compliant with the JBrowse REST Feature Store API.",
     		        "operationId" : "JBrowse Fetch Feature Data",
     		        "produces" : [ "application/json" ],
@@ -449,7 +463,8 @@
     		      }
     		    },
     		    "/jobs" : {
-    		      "put" : {
+    		      "post" : {
+    		    	"tags" : [ "jobs" ],
     		        "description" : "Submit a new job.",
     		        "operationId" : "Jobs Submit",
     		        "produces" : [ "application/json" ],
@@ -474,6 +489,7 @@
     		    },
     		    "/jobs/{id}" : {
     		      "get" : {
+    		    	"tags" : [ "jobs" ],
     		        "description" : "Return the status for the specified job.  The recommended polling rate varies by job type, however anywhere from once per 15 seconds to once per minute should be adequate.",
     		        "operationId" : "Job Fetch",
     		        "produces" : [ "application/json" ],
@@ -496,6 +512,7 @@
     		    },
     		    "/notebooks" : {
     		      "put" : {
+    		    	"tags" : [ "notebooks" ],
     		        "description" : "Add a new notebook.",
     		        "operationId" : "Notebook Add",
     		        "produces" : [ "application/json" ],
@@ -520,6 +537,7 @@
     		    },
     		    "/notebooks/search/{term}" : {
     		      "get" : {
+    		    	"tags" : [ "notebooks" ],
     		        "description" : "Return a list of notebooks that have an id, name, or description that partially match the search term.",
     		        "operationId" : "Notebook Search",
     		        "produces" : [ "application/json" ],
@@ -542,6 +560,7 @@
     		    },
     		    "/notebooks/{id}" : {
     		      "get" : {
+    		    	"tags" : [ "notebooks" ],
     		        "description" : "Return the metadata for the specified notebook.",
     		        "operationId" : "Notebook Fetch",
     		        "produces" : [ "application/json" ],
@@ -564,6 +583,7 @@
     		    },
     		    "/organisms" : {
     		      "put" : {
+    		    	"tags" : [ "organisms" ],
     		        "description" : "Add a new organism.  Please make sure that the description is an NCBI taxonomy. (Support for NCBI tax_id will be added in the future.)",
     		        "operationId" : "Organism Add",
     		        "produces" : [ "application/json" ],
@@ -588,6 +608,7 @@
     		    },
     		    "/organisms/search/{term}" : {
     		      "get" : {
+    		    	"tags" : [ "organisms" ],
     		        "description" : "Return a list of organisms that have an id, name, or description that partially match the search term.",
     		        "operationId" : "Organism Search",
     		        "produces" : [ "application/json" ],
@@ -610,6 +631,7 @@
     		    },
     		    "/organisms/{id}" : {
     		      "get" : {
+    		    	"tags" : [ "organisms" ],
     		        "description" : "Return the metadata for the specified organism.",
     		        "operationId" : "Organism Fetch",
     		        "produces" : [ "application/json" ],
@@ -632,6 +654,7 @@
     		    },
     		    "/users/{id}/items" : {
     		      "get" : {
+    		    	"tags" : [ "users" ],
     		        "description" : "Returns a list of items shared with the specified user.  Only public items, or items which the authenticated requester has access to, are returned. Cannot be used for users other than the authenticated user, otherwise an Access Denied error is returned.",
     		        "operationId" : "Uesr Fetch Shared Items",
     		        "produces" : [ "application/json" ],

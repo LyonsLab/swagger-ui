@@ -271,8 +271,10 @@
 }
 .swagger-section .swagger-ui-wrap .info_title {
   padding-bottom: 10px;
+  font-family: impact;
   font-weight: bold;
-  font-size: 25px;
+  color: #119911;
+  font-size: 4em;
 }
 .swagger-section .swagger-ui-wrap .footer {
   margin-top: 20px;
@@ -308,7 +310,7 @@
 }
 .swagger-section .swagger-ui-wrap .info_description {
   padding-bottom: 10px;
-  font-size: 15px;
+  font-size: 1.2em;
 }
 .swagger-section .swagger-ui-wrap .markdown ol li,
 .swagger-section .swagger-ui-wrap .markdown ul li {
