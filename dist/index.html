@@ -463,7 +463,7 @@
     		      }
     		    },
     		    "/jobs" : {
-    		      "post" : {
+    		      "put" : {
     		    	"tags" : [ "jobs" ],
     		        "description" : "Submit a new job\n\n\"Parameters\" field is specific to job type:\n\n\tParameters by job type:\n\t\t\"export_fasta\": export genome sequence in FASTA fileformat\n\t\t\tgenome_id:  genome id\n\t\t\"export_gff\": export genome annotation in GFF file format\n\t\t\tgenome_id:  genome id\n\t\t\"export_genome\": export genome FASTA/GFF in .tar.gz file\\n\t\t\tgenome_id:  genome id\n\t\t\"export_experiment\": export experiment data files in .tar.gz format\n\t\t\texperiment_id:  experiment id\n\n\tParameters common to all job types:\n\t\tsource_data: [\n\t\t\t{ \"type\": \"irods\", \"path\": \"/iplant/home/user/file\" },\n\t\t\t{ \"type\": \"ftp\",   \"path\": \"ftp://domain/file\" },\n\t\t\t{ \"type\": \"http\",  \"path\": \"https://domain/file\" }\n\t\t]\n\t\tdest_type (required)\n\t\t\t\"irods\":  send the output file(s) to IRODS\n\t\t\t\"http\" (default):  generate a URL to download the output file(s)\n\t\tdest_path (optional): destination path in IRODS\n\t\toverwrite (optional)\n\t\t\t0 (default):  do not overwrite existing files in IRODS\n\t\t\t1: overwrite existing files in IRODS\n\t\temail (optional):  address to send notification email when job is finished\n\t\tnotebook (optional): boolean flag to indicate that the results should be placed into a notebook\n\t\t\tnotebook_id:  the ID for an existing notebook\n\t\t\tnotebook_name:  the name for a new notebook if an existing ID was note given.  If not specified a name is automatically assigned.\n\n    \n",
     		        "operationId" : "Jobs Submit",
